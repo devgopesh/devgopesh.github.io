@@ -138,27 +138,27 @@ $(document).ready(function () {
                 message: {
                     required: "This field is required"
                 }
-            },
-            submitHandler: function (form) {
-                $(form).ajaxSubmit({
-                    type: "POST",
-                    data: $(form).serialize(),
-                    url: "https://formspree.io/gopeshsinghal301@gmail.com",
-                    success: function () {
-                        $('#contact :input').attr('disabled', 'disabled');
-                        $('#contact').fadeTo("slow", 1, function () {
-                            $(this).find(':input').attr('disabled', 'disabled');
-                            $(this).find('label').css('cursor', 'default');
-                            $('#success').fadeIn();
-                        });
-                    },
-                    error: function () {
-                        $('#contact').fadeTo("slow", 1, function () {
-                            $('#error').fadeIn();
-                        });
-                    }
-                });
-            }            
+            }
+            // submitHandler: function (form) {
+            //     $(form).ajaxSubmit({
+            //         type: "POST",
+            //         data: $(form).serialize(),
+            //         url: "https://formspree.io/gopeshsinghal301@gmail.com",
+            //         success: function () {
+            //             $('#contact :input').attr('disabled', 'disabled');
+            //             $('#contact').fadeTo("slow", 1, function () {
+            //                 $(this).find(':input').attr('disabled', 'disabled');
+            //                 $(this).find('label').css('cursor', 'default');
+            //                 $('#success').fadeIn();
+            //             });
+            //         },
+            //         error: function () {
+            //             $('#contact').fadeTo("slow", 1, function () {
+            //                 $('#error').fadeIn();
+            //             });
+            //         }
+            //     });
+            // }            
         });
 
     });
