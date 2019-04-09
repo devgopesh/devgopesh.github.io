@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Arrow Function and Normal Function</title>
+	<link rel="icon" href="img/favicon1.ico" type="image/x-icon">
+	<link href="css/bootstrap.min.css" rel="stylesheet">    
+    <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+    <div class="modal-content">
+        <div class="container">
+            <div class="portfolio-padding">
+                <div class="col-md-8 col-md-offset-2">
+                    <h2>Arrow Function vs Normal Function</h2>
+                    <div class="h-50"></div>
+                    <p>Generally many people get confused between arrow and simple function in javascript.There is a slight difference between the two, and that would be the scope they refer to. As so often, it depends. Arrow functions have different behavior than function declarations / expressions. Arrow functions and function declarations / expressions are not equivalent and cannot be replaced blindly, so lets have a look at the differences first:</p>                    
+                    <br />
+                    <h3>1. Lexical this and arguments</h3>
+                    <br /> 
+                    <p>Arrow functions don't have their own this or arguments binding. Instead, those identifiers are resolved in the lexical scope like any other variable. That means that inside an arrow function, this and arguments refer to the values of this and arguments in the environment the arrow function is defined in (i.e. "outside" the arrow function):</p><p class="lex"><span class="comment">// Example using a function expression</span><br />
+                            function newObject() { <br/>
+                              <span class="first">console.log('Inside `newObject`:', this.foo);</span> <br />
+                              <span class="first">return {</span> <br />
+                                <span class="second">foo: 35,</span> <br />
+                                <span class="second">demo: function() {</span> <br />
+                                  <span class="third">console.log('Inside `demo`:', this.foo);</span> <br />
+                                <span class="second">},</span> <br />
+                              <span class="first">};</span><br />
+                            } <br />
+                            newObject.call({foo: 21}).demo();  <span class="comment">// override `this` inside newObject</span><br /><br />
+                            <span class="comment">// Output</span><br />
+                            <span>Inside `newObject`: 21</span><br /><span>Inside `demo`: 35</span>
+                            </p>
+                    <p class="lex"><span class="comment">// Example using a arrow function</span><br />
+                            function newObject() { <br/>
+                              <span class="first">console.log('Inside `newObject`:', this.foo);</span> <br />
+                              <span class="first">return {</span> <br />
+                                <span class="second">foo: 35,</span> <br />
+                                <span class="second">demo: () => console.log('Inside `bar`:', this.foo),</span><br /> 
+                              <span class="first">};</span><br />
+                            } <br />
+                            newObject.call({foo: 21}).demo();  <span class="comment">// override `this` inside newObject</span><br /><br />
+                            <span class="comment">// Output</span><br />
+                            <span>Inside `newObject`: 21</span><br /><span>Inside `demo`: 21</span>
+                    </p>
+                    <p>In the function expression case, this refers to the object that was created inside the newObject. In the arrow function case, this refers to this of newObject itself. This makes arrow functions useful if you need to access the this of the current environment.</p>
+                    <br />
+                    <h3>2. Arrow functions cannot be called with new</h3>
+                    <br /> 
+                    <p>ES2015 distinguishes between functions that are callable and functions that are constructable. If a function is constructable, it can be called with  new, i.e. new User(). If a function is callable, it can be called without new (i.e. normal function call). Functions created through function declarations / expressions are both constructable and callable. Arrow functions (and methods) are only callable. class constructors are only constructable.</p>
+                    <p>If you are trying to call a non-callable function or to construct a non-constructable function, you will get a runtime error. Arrow functions cannot be used as constructors and will throw an error when used with new.
+                    </p>
+                    <p class="lex">var Foo = () => {};<br />
+                    var foo = new Foo(); <span class="comment">// TypeError: Foo is not a constructor</span></p>
+                    <br />                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+</body>
+</html>
